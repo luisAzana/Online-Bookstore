@@ -1,0 +1,35 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles_author_list.css' %}">
+
+    <h1> Author list </h1>
+    {% load static %}
+    {% if user.is_staff and perms.catalog.add_author %}
+        |<a href="{% url 'author-create'%}">Create Author</a> 
+    {% endif %}
+    
+    <div class="container-author">
+    {% if author_list %}
+        <ul>
+            {% for author in author_list  %}
+                <li class="container-author-list">
+                  <a  class="container-author-list__element" href="{{ author.get_absolute_url }}">{{ author }}</a>   
+                  <p  class="container-author-list__element" >({{author.date_of_birth}} - {{author.date_of_death}})</p>
+                  {% if user.is_staff and perms.catalog.change_author and perms.catalog.delete_author %}
+                    <a class="container-author-list__element" href="{% url 'author-update' pk=author.id %}">( Update )</a>
+                    <a class="container-author-list__element"  href="{% url 'author-delete' pk=author.id %}">( Delete )</a>
+                  {% endif %}
+                </li>
+            {% endfor %}           
+        </ul>
+    </div>
+    {% else %}
+        <p>If you do not have books you will not be able to view the authors.</p>
+    {% endif %}
+   
+
+{% endblock %}
+

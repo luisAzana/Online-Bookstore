@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles_index.css' %}">
+
+<div class="container-info">
+  <div class="container-info__text1">
+    <h1>Lima Bookstore</h1>
+    <p>Welcome to the bookstore in Lima, Peru.</p>
+    <p>Here you can find a wide variety of books and authors.</p>
+  </div>
+  
+  <div class="container-info__text2">
+    <h2>Dynamic content</h2>
+  
+    <p>The library has the following record counts:</p>
+    <ul>
+      <li>Books: {{ num_books }}</li>
+      <li>Copies: {{ num_instances }}</li>
+      <li>Copies available: {{ num_instances_available }}</li>
+      <li>Authors: {{ num_authors }}</li>
+    </ul>
+  
+     <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+  </div>
+</div>
+
+
+{% endblock %}

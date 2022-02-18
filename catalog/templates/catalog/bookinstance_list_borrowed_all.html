@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles_borrowed_list.css' %}">
+
+    <h1>All Borrowed Books</h1>
+    
+    {% if bookinstance_list %}
+    <div class="container-borrowed">
+    <ul>
+      {% for bookinst in bookinstance_list %} 
+      <li class="container-borrowed-list {% if bookinst.is_overdue %}text-danger{% endif %}">
+        <a class="container-borrowed-list__element" href="{% url 'book-detail' pk=bookinst.book.pk %}">
+          {{bookinst.book.title}}
+        </a> 
+        <p class="container-borrowed-list__element">({{ bookinst.due_back }}) </p>
+        {% if user.is_staff %}
+          <p class="container-borrowed-list__element" >User : {{ bookinst.borrower|capfirst }}</p> 
+          <a class="container-borrowed-list__element" href="{% url 'renew-book-librarian' pk=bookinst.id %}">( Renew )</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}       
+{% endblock %}
+

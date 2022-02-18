@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles_form_login.css' %}">
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+<form method="post" action="{% url 'login' %}" >
+    {% csrf_token %}
+    <div class="container-form">
+        <h1>Login</h1>
+        <div class="form-group mb-4 w-75">
+        <input type="text" class="form-control" placeholder="Enter user" name="username">
+        </div>
+        <div class="form-group mb-4 w-75">
+        <input type="password" class="form-control" placeholder="Password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">login</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+</form
+
+{% endblock %}
+
+

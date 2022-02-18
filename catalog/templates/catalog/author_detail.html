@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Author: <strong>{{ author }}</strong></h1>
+  <p> ({{ author.date_of_birth }} - {{ author.date_of_death }}) </p>
+
+  
+
+    {% for bookInfo in author.book_set.all %}
+        {% comment %}        author-detail' pk=book.author.pk        {{bookInfo.get_absolute_url}}       {% endcomment %}
+        <hr>
+        <h4><a href="{% url 'book-detail' pk=bookInfo.id %}"><strong>{{bookInfo.title}}</strong></a></h4>
+        <p>{{bookInfo.summary}}</p>
+  
+    {% endfor %}
+    
+
+{% endblock %}
+
+
