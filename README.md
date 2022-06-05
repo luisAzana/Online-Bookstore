@@ -1,3 +1,3 @@
-# Virtual-library_Django
- 
-Virtual library developed with Django
+# Online Bookstore
+
+Online Bookstore developed with Django
