@@ -1,3 +1,3 @@
 # Online Bookstore
 
-Online Bookstore developed with Django
+Pagina web desarrollada con Django y MySQL
